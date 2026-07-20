@@ -26,6 +26,12 @@ class OrderResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Penjualan';
 
+    protected static ?string $modelLabel = 'Transaksi';
+
+    protected static ?string $pluralModelLabel = 'Transaksi';
+
+    protected static ?string $recordTitleAttribute = 'order_number';
+
     public static function form(Schema $schema): Schema
     {
         return OrderForm::configure($schema);

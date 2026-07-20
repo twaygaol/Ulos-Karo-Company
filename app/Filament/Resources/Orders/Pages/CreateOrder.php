@@ -3,40 +3,21 @@
 namespace App\Filament\Resources\Orders\Pages;
 
 use App\Filament\Resources\Orders\OrderResource;
-use App\Models\OrderItem;
-use App\Models\Product;
+use App\Filament\Resources\Orders\Schemas\OrderForm;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateOrder extends CreateRecord
 {
     protected static string $resource = OrderResource::class;
 
-    protected function afterCreate(): void
+    protected static ?string $title = 'Tambah Transaksi';
+
+    protected static ?string $breadcrumb = 'Tambah';
+
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $order = $this->record;
+        $data['total_price'] = OrderForm::calculateTotal($data['items'] ?? []);
 
-        $items = request()->input('items', []);
-
-        $total = 0;
-
-        foreach ($items as $item) {
-            $product = product::find($item['product_id']);
-
-            $price = $product->price;
-            $subtotal = $price * $item['quantity'];
-
-            orderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $product->id,
-                'quantity' => $item['quantity'],
-                'price' => $price,
-            ]);
-
-            $total += $subtotal;
-        }
-
-        $order->update([
-            'total_price' => $total
-        ]);
+        return $data;
     }
 }

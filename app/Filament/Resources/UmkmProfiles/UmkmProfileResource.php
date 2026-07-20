@@ -11,11 +11,11 @@ use App\Filament\Resources\UmkmProfiles\Schemas\UmkmProfileInfolist;
 use App\Filament\Resources\UmkmProfiles\Tables\UmkmProfilesTable;
 use App\Models\UmkmProfile;
 use BackedEnum;
-use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UmkmProfileResource extends Resource
 {
@@ -34,6 +34,7 @@ class UmkmProfileResource extends Resource
     protected static ?string $pluralModelLabel = 'Profil UMKM';
 
     protected static ?string $modelLabel = 'Profil UMKM';
+
     protected static ?string $pluralLabel = 'Data UMKM';
 
     public static function form(Schema $schema): Schema

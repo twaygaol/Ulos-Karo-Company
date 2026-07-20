@@ -10,10 +10,13 @@ class ViewOrder extends ViewRecord
 {
     protected static string $resource = OrderResource::class;
 
+    protected static ?string $breadcrumb = 'Detail';
+
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->label('Ubah Transaksi'),
         ];
     }
 }

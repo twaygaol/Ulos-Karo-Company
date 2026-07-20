@@ -26,17 +26,30 @@ class UmkmProfilesTable
 
                 TextColumn::make('address')
                     ->label('Alamat')
-                    ->limit(40),
+                    ->limit(40)
+                    ->searchable(),
+
+                TextColumn::make('latitude')
+                    ->label('Latitude')
+                    ->numeric(decimalPlaces: 7)
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('longitude')
+                    ->label('Longitude')
+                    ->numeric(decimalPlaces: 7)
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
 
                 TextColumn::make('updated_at')
                     ->label('Diupdate')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
