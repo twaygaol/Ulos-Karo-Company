@@ -24,6 +24,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route katalog
+Route::get('/katalog', function () {
+    $products = \App\Models\Product::latest()->paginate(12);
+    return view('catalog', compact('products'));
+})->name('catalog');
+
 // Route checkout
 Route::get('/checkout/{product}', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/process/{product}', [CheckoutController::class, 'process'])
@@ -37,6 +43,11 @@ Route::get('/orders/{order}', [OrderController::class, 'show'])
 
 // Midtrans callback
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
+
+// Route cancel order (hanya yang pending)
+Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel'])
+    ->name('orders.cancel')
+    ->middleware('auth');
 
 // Route untuk testing (HANYA UNTUK LOCAL!)
 Route::get('/orders/{order}/force-paid', [OrderController::class, 'updatePaymentStatus'])

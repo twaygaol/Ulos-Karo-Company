@@ -12,7 +12,11 @@ class Order extends Model
         'total_price',
         'status',
         'snap_token',
-        'payment_status'
+        'payment_status',
+        'payment_type',
+        'shipping_address',
+        'shipping_phone',
+        'shipping_name',
     ];
 
     protected $casts = [

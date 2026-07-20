@@ -27,8 +27,10 @@
                 @csrf
 
                 <label class="block mb-2 font-semibold">Jumlah</label>
-                <input type="number" name="qty" value="1" min="1"
-                       class="w-full border rounded-lg p-3 mb-6">
+                <input type="number" name="qty" value="1" min="1" max="{{ $product->stock }}"
+                       class="w-full border rounded-lg p-3 mb-2">
+                <p class="text-sm text-gray-500 mb-6">Stok tersedia: {{ $product->stock }}</p>
+                @error('qty') <p class="text-red-500 text-sm mb-4">{{ $message }}</p> @enderror
 
                 <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700">
                     Buat Pesanan

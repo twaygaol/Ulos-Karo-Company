@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\UmkmProfile;
 use Illuminate\Http\Request;
@@ -15,10 +16,15 @@ class LandingController extends Controller
         $contents = Content::all()->groupBy('type');
         $umkm = UmkmProfile::first();
 
+        $totalProducts = Product::count();
+        $totalOrders = Order::where('payment_status', 'paid')->count();
+
         return view('landing', compact(
             'products',
             'contents',
-            'umkm'
+            'umkm',
+            'totalProducts',
+            'totalOrders'
         ));
     }
 }

@@ -8,9 +8,9 @@
             <span class="text-xl font-bold text-purple-600">Ulos Karo</span>
             <div class="flex items-center space-x-4">
                 <!-- Tombol Katalog -->
-                <a href="{{ route('landing') }}#katalog"
+                <a href="{{ route('catalog') }}"
                     class="text-purple-600 hover:text-purple-700 font-medium hidden md:block">
-                    🛍️ Katalog
+                    Katalog
                 </a>
 
                 <!-- Profile -->
@@ -32,13 +32,13 @@
                             <p class="font-semibold text-sm">{{ $user->name }}</p>
                             <p class="text-xs text-gray-500">{{ $user->email }}</p>
                         </div>
-                        <a href="{{ route('landing') }}#katalog" class="block px-4 py-3 text-sm hover:bg-gray-100">
-                            🛍️ Katalog Produk
+                        <a href="{{ route('catalog') }}" class="block px-4 py-3 text-sm hover:bg-gray-100">
+                            Katalog Produk
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button class="w-full text-left px-4 py-3 text-sm hover:bg-gray-100 text-red-600">
-                                🚪 Logout
+                                Logout
                             </button>
                         </form>
                     </div>
@@ -173,9 +173,16 @@
                                     class="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700">
                                     Bayar Sekarang
                                 </button>
+                                <form action="{{ route('orders.cancel', $order->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('Yakin ingin membatalkan?')"
+                                        class="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700">
+                                        Batalkan
+                                    </button>
+                                </form>
                             @elseif($order->payment_status == 'paid')
                                 <span class="text-green-600 text-sm font-semibold py-2">
-                                    ✓ Pembayaran Selesai
+                                    Pembayaran Selesai
                                 </span>
                             @endif
                         </div>

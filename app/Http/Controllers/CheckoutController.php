@@ -19,8 +19,12 @@ class CheckoutController extends Controller
     public function process(Request $request, Product $product)
     {
         $request->validate([
-            'qty' => 'required|integer|min:1'
+            'qty' => 'required|integer|min:1|max:' . $product->stock,
         ]);
+
+        if ($product->stock < $request->qty) {
+            return back()->withErrors(['qty' => 'Stok tidak mencukupi. Sisa stok: ' . $product->stock]);
+        }
 
         $total = $product->price * $request->qty;
 
@@ -28,7 +32,7 @@ class CheckoutController extends Controller
             'user_id' => Auth::id(),
             'order_number' => 'ORD-' . time(),
             'total_price' => $total,
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
 
         OrderItem::create([
@@ -36,8 +40,9 @@ class CheckoutController extends Controller
             'product_id' => $product->id,
             'price' => $product->price,
             'quantity' => $request->qty,
-            'subtotal' => $total
         ]);
+
+        $product->decrement('stock', $request->qty);
 
         // MIDTRANS PARAMS
         $params = [

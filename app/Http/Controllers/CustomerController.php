@@ -19,6 +19,10 @@ class CustomerController extends Controller
 
     public function show(Order $order)
     {
+        if ($order->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized access to this order.');
+        }
+
         return view('customer.detail', compact('order'));
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Orders\Pages;
 
 use App\Filament\Resources\Orders\OrderResource;
-use App\Models\orderItem;
-use App\Models\product;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateOrder extends CreateRecord

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Orders\Schemas;
 
-use App\Models\product;
+use App\Models\Product;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;

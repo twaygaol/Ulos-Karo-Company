@@ -126,22 +126,22 @@
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 text-center gap-8">
 
             <div class="p-6">
-                <h3 class="text-4xl font-bold text-purple-600">50+</h3>
-                <p class="text-gray-600 mt-2">Pengrajin Terdaftar</p>
+                <h3 class="text-4xl font-bold text-purple-600">{{ $umkm ? '1' : '0' }}</h3>
+                <p class="text-gray-600 mt-2">UMKM Terdaftar</p>
             </div>
 
             <div class="p-6">
-                <h3 class="text-4xl font-bold text-purple-600">200+</h3>
+                <h3 class="text-4xl font-bold text-purple-600">{{ $totalProducts }}+</h3>
                 <p class="text-gray-600 mt-2">Produk Ulos</p>
             </div>
 
             <div class="p-6">
-                <h3 class="text-4xl font-bold text-purple-600">1000+</h3>
+                <h3 class="text-4xl font-bold text-purple-600">{{ $totalOrders }}+</h3>
                 <p class="text-gray-600 mt-2">Transaksi Digital</p>
             </div>
 
             <div class="p-6">
-                <h3 class="text-4xl font-bold text-purple-600">15+</h3>
+                <h3 class="text-4xl font-bold text-purple-600">{{ $products->unique('jenis')->count() }}+</h3>
                 <p class="text-gray-600 mt-2">Jenis Ulos</p>
             </div>
 
@@ -264,7 +264,7 @@
                             <div class="absolute top-4 left-4">
                                 <span
                                     class="bg-white/90 text-purple-600 text-xs px-4 py-2 rounded-full font-semibold shadow-lg">
-                                    {{ $product->category ?? 'Ulos Tradisional Karo' }}
+                                    {{ $product->jenis ?? 'Ulos Tradisional Karo' }}
                                 </span>
                             </div>
 
@@ -329,7 +329,7 @@
 
             <!-- Tombol Lihat Semua -->
             <div class="text-center mt-12">
-                <a href="#semua-produk"
+                <a href="{{ route('catalog') }}"
                     class="inline-flex items-center space-x-2 bg-gray-100 text-purple-600 px-8 py-4 rounded-full hover:bg-purple-600 hover:text-white transition-all font-semibold">
                     <span>Lihat Semua Koleksi</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
